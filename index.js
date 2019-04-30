@@ -4,7 +4,6 @@ const Octokit = require('@octokit/rest');
 const config = require('./config.json');
 
 module.exports.webhook = new IncomingWebhook(config.SLACK_WEBHOOK_URL);
-module.exports.status = config.GC_SLACK_STATUS;
 
 module.exports.getGithubCommit = async (build, octokit) => {
   try {
@@ -121,12 +120,18 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
       value: build.source.repoSource.branchName,
     });
 
-    if (githubCommit) {
+    if (githubCommit) { 
+      let author;
+      try {  
+        author = githubCommit.data.author.name;
+      } catch(err) {
+        author = "unknown";
+      }
       message.attachments[0].fields.push({
         title: 'Commit Author',
-        value: githubCommit.data.author.name,
+        value: author,
       });
-    }
+    } 
   }
 
   // Add images to the message.
@@ -138,5 +143,11 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
       value: images[i],
     });
   }
+
+  message.attachments[0].fields.push({
+    title: 'Gcb bot version',
+    value: 'test-version',
+  });
+
   return message;
 };
