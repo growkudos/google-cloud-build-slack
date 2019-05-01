@@ -6,7 +6,7 @@ Slack integration for Google Cloud Build, using Google Cloud Functions to post m
 
 The webhook needs configuration parameters that are given setting the following environment variables: 
 
-1. `SLACK_WEBHOOK_URL`: you can find it in here: https://growkudos.slack.com/services/B68AXU94J#service_setup.
+1. `SLACK_WEBHOOK_URL`: you can find it in here: https://growkudos.slack.com/services/B68AXU94J#service_setup in the _Setup Instructions_ section.
 2. `GCP_REGION`
 3. `GITHUB_TOKEN`: you can find it in the info.txt file in gocrypto-fs looking for the word `GITHUB_CI_TOKEN_GCB`
 
