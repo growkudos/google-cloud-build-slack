@@ -97,7 +97,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     text,
     mrkdwn: true,
     username: 'gcb-bot',
-    iconEmoji: ':robot_face:',
+    icon_emoji: ':robot_face:',
     attachments: [
       {
         color: STATUS_COLOR[build.status] || DEFAULT_COLOR,
