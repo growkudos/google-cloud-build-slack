@@ -158,17 +158,7 @@ describe('createSlackMessage', () => {
   });
 });
 
-function cleanConfig(callback) {
-  const config = {
-    SLACK_WEBHOOK_URL: 'https://hooks.slack.com/services/XXX',
-  };
-  fs.writeFile('config.json', JSON.stringify(config), 'utf8', callback);
-}
-
 describe('subscribe', () => {
-  beforeEach(cleanConfig);
-  afterEach(cleanConfig);
-
   beforeEach(() => {
     this.webhookCalled = false;
     lib.webhook.send = (message) => {
