@@ -80,6 +80,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
   const fields = [{
     title: 'Status',
     value: build.status,
+    short: false
   }];
 
   if (!isWorking) {
@@ -88,12 +89,15 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     fields.push({
       title: 'Duration',
       value: buildTime,
+      short: false
     });
   }
 
   const message = {
     text,
     mrkdwn: true,
+    username: 'gcb-bot',
+    iconEmoji: ':robot_face:',
     attachments: [
       {
         color: STATUS_COLOR[build.status] || DEFAULT_COLOR,
@@ -113,11 +117,13 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     message.attachments[0].fields.push({
       title: 'Repository',
       value: build.source.repoSource.repoName,
+      short: false
     });
 
     message.attachments[0].fields.push({
       title: 'Branch',
       value: build.source.repoSource.branchName,
+      short: false
     });
 
     if (githubCommit) { 
@@ -130,24 +136,19 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
       message.attachments[0].fields.push({
         title: 'Commit Author',
         value: author,
+        short: false
       });
     } 
   }
 
-  // Add images to the message.
-  const images = build.images || [];
-  // eslint-disable-next-line no-plusplus
-  for (let i = 0, len = images.length; i < len; i++) {
+  // Show the build type if it is deploy
+  if (build.tags.includes('deploy')) {
     message.attachments[0].fields.push({
-      title: 'Image',
-      value: images[i],
+      title: 'Type',
+      value: 'deploy',
+      short: false
     });
   }
-
-  message.attachments[0].fields.push({
-    title: 'Gcb bot version',
-    value: 'test-version',
-  });
 
   return message;
 };
