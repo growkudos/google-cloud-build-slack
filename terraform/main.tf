@@ -57,5 +57,6 @@ resource "google_cloudfunctions_function" "function" {
   }
   environment_variables = {
     GITHUB_TOKEN = "${var.github_token}"
+    SLACK_WEBHOOK_URL = "${var.slack_webhook_url}"
   }
 }

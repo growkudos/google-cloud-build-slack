@@ -1,9 +1,8 @@
 const { IncomingWebhook } = require('@slack/client');
 const humanizeDuration = require('humanize-duration');
 const Octokit = require('@octokit/rest');
-const config = require('./config.json');
 
-module.exports.webhook = new IncomingWebhook(config.SLACK_WEBHOOK_URL);
+module.exports.webhook = new IncomingWebhook(process.env.SLACK_WEBHOOK_URL);
 
 module.exports.getGithubCommit = async (build, octokit) => {
   try {
