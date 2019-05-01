@@ -90,22 +90,6 @@ describe('createSlackMessage', () => {
     attachment.fields.should.not.containEql({ title: 'Duration', value: `${deltaInMinutes} minutes` });
   });
 
-  it('should create a slack message with images', async () => {
-    const build = {
-      id: 'build-id',
-      logUrl: 'https://logurl.com',
-      status: 'SUCCESS',
-      finishTime: Date.now(),
-      images: ['image-1', 'image-2'],
-    };
-    const message = await lib.createSlackMessage(build);
-
-    const attachment = message.attachments[0];
-    attachment.fields.should.have.length(nbCommonFields + build.images.length);
-    attachment.fields[nbCommonFields].value.should.equal('image-1');
-    attachment.fields[nbCommonFields + 1].value.should.equal('image-2');
-  });
-
   it('should include the source info in the message', async () => {
     const build = lib.eventToBuild(base64Build);
     const message = await lib.createSlackMessage(build);

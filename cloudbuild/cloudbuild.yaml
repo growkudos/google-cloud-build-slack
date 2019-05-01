@@ -1,4 +1,7 @@
 steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['run', 'ci']
+
 - name: hashicorp/terraform
   args: ['init']
   dir: 'terraform'

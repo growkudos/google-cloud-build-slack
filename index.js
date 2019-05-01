@@ -142,7 +142,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
   }
 
   // Show the build type if it is deploy
-  if (build.tags.includes('deploy')) {
+  if (build.tags && build.tags.includes('deploy')) {
     message.attachments[0].fields.push({
       title: 'Type',
       value: 'deploy',
