@@ -80,7 +80,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
   const fields = [{
     title: 'Status',
     value: build.status,
-    short: false
+    short: true
   }];
 
   if (!isWorking) {
@@ -89,7 +89,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     fields.push({
       title: 'Duration',
       value: buildTime,
-      short: false
+      short: true
     });
   }
 
@@ -117,13 +117,13 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     message.attachments[0].fields.push({
       title: 'Repository',
       value: build.source.repoSource.repoName,
-      short: false
+      short: true
     });
 
     message.attachments[0].fields.push({
       title: 'Branch',
       value: build.source.repoSource.branchName,
-      short: false
+      short: true
     });
 
     if (githubCommit) { 
@@ -136,7 +136,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
       message.attachments[0].fields.push({
         title: 'Commit Author',
         value: author,
-        short: false
+        short: true
       });
     } 
   }
@@ -146,7 +146,7 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     message.attachments[0].fields.push({
       title: 'Type',
       value: 'deploy',
-      short: false
+      short: true
     });
   }
 
