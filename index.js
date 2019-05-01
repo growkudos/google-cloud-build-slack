@@ -126,17 +126,15 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
     });
 
     if (githubCommit) { 
-      let author;
       try {  
-        author = githubCommit.data.author.name;
+        message.attachments[0].fields.push({
+          title: 'Commit Author',
+          value: githubCommit.data.author.name,
+          short: true
+        });
       } catch(err) {
-        author = "unknown";
+        //cannot retrieve author name. Ignore and do not display it. 
       }
-      message.attachments[0].fields.push({
-        title: 'Commit Author',
-        value: author,
-        short: true
-      });
     } 
   }
 
