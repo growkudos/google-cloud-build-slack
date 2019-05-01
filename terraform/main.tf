@@ -23,10 +23,6 @@ data "archive_file" "index" {
     content = "${file("../package.json")}"
     filename = "package.json"
   }
-  source {
-    content = "${file("../config.json")}"
-    filename = "config.json"
-  }
 }
 
 resource "google_storage_bucket" "bucket" {
