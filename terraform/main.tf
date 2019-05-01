@@ -2,7 +2,7 @@
 terraform {
   backend "gcs" {
     bucket = "growkudos-com-terraform-state"
-    prefix  = "gcp/functions/subscribe-test"
+    prefix  = "gcp/functions/subscribe"
     region = "europe-west2-a"
   }
 }
@@ -14,7 +14,7 @@ provider "google" {
 
 data "archive_file" "index" {
   type        = "zip"
-  output_path = "subscribe-test.zip"
+  output_path = "subscribe.zip"
   source {
     content = "${file("../index.js")}"
     filename = "index.js"
@@ -37,7 +37,7 @@ resource "google_storage_bucket_object" "archive" {
 }
 
 resource "google_cloudfunctions_function" "function" {
-  name                  = "subscribe-test"
+  name                  = "subscribe"
   description           = "Managed by Terraform"
   region                = "us-central1"
   runtime               = "nodejs8"
