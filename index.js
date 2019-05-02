@@ -22,6 +22,7 @@ module.exports.getGithubCommit = async (build, octokit) => {
     // return github commit
     return githubCommit;
   } catch (err) {
+    console.log(err);
     return err;
   }
 };
@@ -137,7 +138,8 @@ module.exports.createSlackMessage = async (build, githubCommit) => {
           short: true
         });
       } catch(err) {
-        //cannot retrieve author name. Ignore and do not display it. 
+        //cannot retrieve author name. Log it and do not display it. 
+        console.log(err);
       }
     } 
   }
