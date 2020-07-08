@@ -41,7 +41,7 @@ resource "google_cloudfunctions_function" "function" {
   region                = "us-central1"
   runtime               = "nodejs8"
   entry_point           = "subscribe"
-  event_trigger = {
+  event_trigger {
     event_type = "providers/cloud.pubsub/eventTypes/topic.publish"
     resource = "cloud-builds"
   }
